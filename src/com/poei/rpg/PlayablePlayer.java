@@ -1,3 +1,4 @@
+package com.poei.rpg;
 
 public class PlayablePlayer {
     private String name;

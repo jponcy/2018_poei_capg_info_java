@@ -1,5 +1,7 @@
+package com.poei.rpg;
+
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public class PlayerClass {
     private String name;
@@ -11,16 +13,24 @@ public class PlayerClass {
     private Weapon firstHand;
     private Weapon secondHand;
 
-//    public boolean equipHead(HeadStuff stuff) {
-//        boolean result = false;
-//        
-//        if (this.stuffs.contains(stuff)) {
-//            this.headStuff = stuff;
-//            result = true;
-//        }
-//        
-//        return result;
-//    }
+    /** 
+     * Permet de changer l'équipement de tête.
+     * 
+     * Il s'agit de la solution la plus simple, et serait rapide mais nous avons une grosse redondance de méthodes
+     * (il faut créer la même méthode pour chaque bout d'équipement). Nous avonc donc choisi la solution suivante avec
+     * {@link equip} qui utilise le polymorphisme.
+     */
+    @SuppressWarnings("all")
+    public boolean equipHead(HeadStuff stuff) {
+        boolean result = false;
+        
+        if (this.stuffs.contains(stuff)) {
+            this.headStuff = stuff;
+            result = true;
+        }
+        
+        return result;
+    }
 
     public boolean equip(Stuff stuff) {
         boolean result = false;
@@ -40,17 +50,17 @@ public class PlayerClass {
         } else if (stuff instanceof BodyStuff) {
             this.bodyStuff = (BodyStuff) stuff;
         } else if (stuff instanceof Weapon) {
-            if (this.firstHand != null && this.firstHand.isTwoHands()) {
-                this.firstHand = null;
-                this.secondHand = null;
+            if (this.getFirstHand() != null && this.getFirstHand().isTwoHands()) {
+                this.setFirstHand(null);
+                this.setSecondHand(null);
             }
 
             Weapon weapon = (Weapon) stuff;
 
             if (weapon.isSecondHand()) {
-                this.secondHand = weapon;
+                this.setSecondHand(weapon);
             } else {
-                this.firstHand = weapon;
+                this.setFirstHand(weapon);
             }
         } else {
             result = false;
@@ -141,5 +151,33 @@ public class PlayerClass {
      */
     public final void setBodyStuff(BodyStuff bodyStuff) {
         this.bodyStuff = bodyStuff;
+    }
+
+    /**
+     * @return the firstHand
+     */
+    public Weapon getFirstHand() {
+        return firstHand;
+    }
+
+    /**
+     * @param firstHand the firstHand to set
+     */
+    public void setFirstHand(Weapon firstHand) {
+        this.firstHand = firstHand;
+    }
+
+    /**
+     * @return the secondHand
+     */
+    public Weapon getSecondHand() {
+        return secondHand;
+    }
+
+    /**
+     * @param secondHand the secondHand to set
+     */
+    public void setSecondHand(Weapon secondHand) {
+        this.secondHand = secondHand;
     }
 }

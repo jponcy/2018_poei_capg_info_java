@@ -1,4 +1,7 @@
+package com.poei.rpg;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class WeaponCategory {
     private String name;

@@ -1,3 +1,4 @@
+package com.poei.rpg;
 
 public abstract class Stuff {
     private String name;

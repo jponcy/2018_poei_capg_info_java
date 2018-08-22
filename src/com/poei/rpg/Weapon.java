@@ -1,3 +1,4 @@
+package com.poei.rpg;
 
 public class Weapon extends Stuff {
     private WeaponCategory category;
